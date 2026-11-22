@@ -49,19 +49,19 @@ the current breadboard setup is proof of the idea, but it is not the final look 
 
 ### early wiring and board testing
 
-![early Marki wiring](images/marki-wiring.jpg)
+![early Marki wiring](assets/images/marki-workbench-wiring.jpg)
 
 this is one of the early setups. lots of jumper wires, breadboard energy, and figuring out which board is doing what.
 
 ### another hardware test
 
-![Marki hardware test](images/marki-hardware-test.jpg)
+![Marki hardware test](assets/images/marki-board-and-oled.jpg)
 
 this shows the boards and display being tested together. it is not super pretty yet but it is the part where the project starts becoming an actual object.
 
 ### testing and planning
 
-![Marki testing setup](images/marki-testing.jpg)
+![Marki testing setup](assets/images/elegoo-starter-kit.webp)
 
 this is from the testing stage while working through the display and wiring setup.
 
@@ -110,3 +110,9 @@ the end goal is not just a random circuit. i want it to feel like a real persona
 this is not finished yet, but it is moving. the point of this repo is to show the whole process, including the messy parts, the tests that work, and the stuff that still needs fixing.
 
 more updates coming as Marki gets less breadboard and more desktop.
+
+## project assets and circuit wiring
+
+the full image collection is on the [Marki assets page](assets/README.md).
+
+the current circuit notes, component locations, and pin-map worksheet are in [circuit wiring and component placement](docs/circuit-wiring.md).

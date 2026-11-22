@@ -1,0 +1,7 @@
+signal,from_component,from_pin,to_component,to_pin,voltage_or_level,status,notes
+power,controller board,VCC or 3V3,OLED,VCC,verify module rating,verify,Use the board and display labels rather than the photo alone.
+ground,controller board,GND,OLED,GND,0 V,verify,Confirm a continuous common ground.
+I2C clock,controller board,TBD,OLED,SCL,3.3 V logic,TBD,Record the exact GPIO after checking the board variant.
+I2C data,controller board,TBD,OLED,SDA,3.3 V logic,TBD,Record the exact GPIO after checking the board variant.
+board-to-board power,TBD,TBD,second controller board,TBD,verify,TBD,Document the power source and common ground before connecting.
+board-to-board data,controller board,TBD,second controller board,TBD,TBD,TBD,Choose the protocol and record both ends of the link.
