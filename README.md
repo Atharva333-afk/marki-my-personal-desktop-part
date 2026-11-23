@@ -540,6 +540,207 @@ but this is the first version where the ESP32, phone, and a real physical output
 
 ---
 
+
+## the tests i actually ran
+
+i figured i should probably keep the actual tests in here too, because half of this project so far has been me trying something, thinking it worked, and then realizing there was something else i hadn't checked.
+
+these are from the November 22 build session. some of them worked, some definitely did not, but i wanted to keep all of them here anyway.
+
+### 1. getting Arduino IDE to recognize the ESP8266
+
+![Arduino IDE board selection test](assets/arduino-screenshots/Screenshot%202026-11-22%20at%209.28.46%E2%80%AFPM.png)
+
+this was before i could even properly upload anything.
+
+Arduino IDE was asking me to select a board and a USB port, but at first the NodeMCU board wasn't showing up.
+
+turns out i hadn't installed the ESP8266 board package.
+
+so i had to go into the settings, add the package URL, open Boards Manager, install the ESP8266 package, and then select the correct board.
+
+i also found out that Boards Manager and Library Manager are two completely different things lol
+
+eventually i got the board selected and the sketch started compiling.
+
+**result: board selection fixed, compilation working.**
+
+unfortunately that didn't mean the actual upload was going to work.
+
+### 2. trying to upload the ESP8266 code
+
+this was probably one of the most annoying parts of the whole build.
+
+the code itself was compiling, but whenever Arduino IDE tried uploading it to the ESP8266, it would fail.
+
+the error was:
+
+\`\`\`text
+Failed to connect to ESP8266:
+Invalid head of packet (0x00)
+\`\`\`
+
+i tried checking the USB port, changing the upload speed, unplugging and reconnecting the board, and using the FLASH and RST buttons.
+
+the ESP8266 would briefly flash its onboard LED whenever i connected it, which at least showed that it was receiving power.
+
+but apparently getting power and actually being able to upload code are very different things.
+
+**result: compilation worked, upload failed.**
+
+i eventually decided that instead of spending the entire night trying to fix one board, i should test the same idea using an ESP32.
+
+### 3. the ESP32 upload
+
+![Successful ESP32 firmware upload](assets/arduino-screenshots/Screenshot%202026-11-22%20at%2010.05.44%E2%80%AFPM.png)
+
+THIS was the screenshot i had been trying to get to for a while.
+
+i switched the bottom board to an ESP32 DevKit V1, changed the code to use the ESP32 libraries, and selected DOIT ESP32 DEVKIT V1 in Arduino IDE.
+
+then i uploaded the program.
+
+and it actually went through.
+
+the upload reached 100%, Arduino verified the data, and then the ESP32 reset.
+
+\`\`\`text
+Writing ... 100.0%
+
+Hash of data verified.
+
+Hard resetting via RTS pin...
+\`\`\`
+
+after spending so much time dealing with the ESP8266 error, this was a pretty big improvement.
+
+at least now the board was actually running the code that i had written.
+
+**result: passed. successful firmware upload.**
+
+### 4. testing the Marki Wi-Fi network
+
+after uploading the code, i wanted to see if the ESP32 could actually create its own Wi-Fi network.
+
+the program was supposed to make a network called Marki, which i could then connect to from my phone.
+
+i connected my phone, opened the local webpage at:
+
+\`\`\`text
+http://192.168.4.1
+\`\`\`
+
+and the controller loaded.
+
+this was cool because the ESP32 didn't need an internet connection to do it.
+
+the board was hosting its own little webpage and i could access it directly from my phone.
+
+the page had three basic controls:
+
+- LED ON
+- LED OFF
+- BUZZER TEST
+
+nothing too complicated, which was exactly what i wanted for the first test.
+
+**result: passed. Wi-Fi and the local webpage worked.**
+
+### 5. testing the buzzer
+
+this was the first proper hardware test that actually worked through the phone controller.
+
+the buzzer was connected to GPIO19 on the ESP32.
+
+i opened the Marki webpage and pressed the buzzer test button.
+
+and it made a sound.
+
+the code was sending a short tone to the buzzer whenever the webpage received the beep command.
+
+it sounds like a small thing, but this meant the phone was successfully communicating with the ESP32 and the ESP32 was controlling something physically connected to it.
+
+this was basically one of the main things i wanted to accomplish with the first working version.
+
+**result: passed. buzzer working through the phone controller.**
+
+### 6. testing the LED
+
+the LED was supposed to be the easier part.
+
+it wasn't.
+
+i connected the blue LED to GPIO18 and added a resistor to limit the current.
+
+then i tried using the LED ON and LED OFF buttons on the webpage.
+
+the Wi-Fi worked. the buzzer worked. the webpage worked.
+
+but the LED didn't turn on.
+
+so i started checking all the individual connections.
+
+the GPIO18 wire was connected to F1 on the breadboard, the resistor went between G1 and G2, the LED was connected between H2 and H3, and the ground jumper went from I3 to the negative rail.
+
+the arrangement made sense because the holes in each numbered row were internally connected.
+
+then i realized i wasn't even sure what resistance the original resistor had.
+
+after trying to read the tiny colored stripes, i went through my ELEGOO kit and eventually found the actual 220 ohm resistor.
+
+so i replaced the original resistor with that.
+
+**result: the initial LED test failed. the resistor has been changed, but the final ON/OFF test still needs to be confirmed.**
+
+i'm not calling it working until i've actually seen it respond properly.
+
+### 7. the OLED and second ESP
+
+these are the next things i want to test.
+
+the OLED has already been mounted and wired during the hardware experiments, but the current ESP32 controller code doesn't display anything on it yet.
+
+i want to get a simple message showing up on the screen before adding clocks, tasks, timers, and all the other modes.
+
+the two-board communication is also something i still need to work on.
+
+i've physically arranged the boards together, but that doesn't mean they're already sending information back and forth.
+
+i want to figure that out properly rather than just connecting random wires and hoping something happens.
+
+**result: still to be tested.**
+
+### all the test results
+
+| Test | Result |
+| --- | --- |
+| ESP8266 board package setup | Fixed |
+| ESP8266 code compilation | Passed |
+| ESP8266 firmware upload | Failed |
+| ESP32 code compilation | Passed |
+| ESP32 firmware upload | Passed |
+| Marki Wi-Fi network | Passed |
+| Phone web controller | Passed |
+| Buzzer controlled from phone | Passed |
+| LED with 220 ohm resistor | Final retest needed |
+| OLED displaying information | Not yet confirmed |
+| ESP-to-ESP communication | Not implemented yet |
+
+honestly i think keeping these tests is just as important as keeping the pictures of the hardware.
+
+otherwise it looks like i just plugged a bunch of things together, uploaded the code once, and everything worked.
+
+which is definitely not what happened.
+
+the whole process was a lot of figuring out why something wasn't working, changing one thing, trying again, and then finding a completely different problem.
+
+but that's also how i went from having an ESP8266 and an OLED on a breadboard to an ESP32 that could actually respond to commands from my phone.
+
+and i want to keep documenting those tests as Marki gets more features.
+
+---
+
+
 ## the current ESP32 connections
 
 this is the working pin plan for the current test setup.
