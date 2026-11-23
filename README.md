@@ -90,6 +90,7 @@ the end goal is not just a random circuit. i want it to feel like a real persona
 - the project has a clear hardware direction
 - the boards and displays have been physically tested
 - early wiring setups have been documented
+- a small ESP32 LED and buzzer controller has been uploaded and documented
 - the two board communication idea is being worked toward
 - build progress is saved in Lapse videos and photos
 
@@ -116,3 +117,5 @@ more updates coming as Marki gets less breadboard and more desktop.
 the full image collection is on the [Marki assets page](assets/README.md).
 
 the current circuit notes, component locations, and pin-map worksheet are in [circuit wiring and component placement](docs/circuit-wiring.md).
+
+the uploaded ESP32 LED and buzzer test, plus safe upload notes, live in [firmware](firmware/README.md).
