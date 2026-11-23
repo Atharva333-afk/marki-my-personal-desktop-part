@@ -9,7 +9,7 @@ the main idea is to have a desktop hub that can show info, talk between boards, 
 
 ![Marki early hardware setup](assets/images/marki-workbench-wiring.jpg)
 
-i wanted something that could sit next to my computer and just be there. not something i have to keep opening on my laptop or checking on my phone, but an actual little device that i can look at while doing other things.
+i wanted something that could sit next to my computer and just be there. not something i have to keep opening on my laptop or checking on my phone, but an actual little device that can look at while doing other things.
 
 and i wanted to make it myself.
 
@@ -1159,3 +1159,4 @@ right now it's still a breadboard full of experiments.
 eventually i want it to be one little desktop companion.
 
 more updates coming as Marki gets less breadboard and more desktop.
+i 
