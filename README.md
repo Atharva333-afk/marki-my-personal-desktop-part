@@ -525,7 +525,8 @@ this is where Marki stands after the November 2026 build sessions.
 | Web controller | Working |
 | Buzzer test | Working |
 | Blue LED on GPIO18 | 220 ohm resistor installed, final retest to confirm |
-| OLED screen | Connected during hardware testing, display code still to finish |
+| OLED screen | Retested successfully and displaying text; full interface still to finish |
+| Marki startup/loading animation | Part 1 and Part 2 designed frame by frame in Canva |
 | Two ESP board communication | Planned, not finished |
 | Four digit display | Tested as a hardware idea, not in the current setup |
 | Final desk enclosure | Not built yet |
@@ -694,21 +695,21 @@ so i replaced the original resistor with that.
 
 i'm not calling it working until i've actually seen it respond properly.
 
-### 7. the OLED and second ESP
+### 7. retesting the OLED
 
-these are the next things i want to test.
+after the earlier hardware problems, i went back and retested the OLED with the newer code.
 
-the OLED has already been mounted and wired during the hardware experiments, but the current ESP32 controller code doesn't display anything on it yet.
+this was a separate test from the original wiring experiments because i wanted to make sure the display was actually receiving power, staying connected, and showing something after the code was uploaded.
 
-i want to get a simple message showing up on the screen before adding clocks, tasks, timers, and all the other modes.
+near the end of the test, the breadboard was held up to the camera and the OLED was visibly powered on and displaying text.
 
-the two-board communication is also something i still need to work on.
+that was a pretty important confirmation for Marki. the screen is no longer just a display that has been wired into the breadboard. it has now been tested again with the updated setup and is visibly working.
 
-i've physically arranged the boards together, but that doesn't mean they're already sending information back and forth.
+this does not mean the complete Marki interface is finished yet. i still need to add the actual clock, tasks, focus timer, status modes, messages, and idle face. but getting the OLED to display text gives me a real starting point for all of those features.
 
-i want to figure that out properly rather than just connecting random wires and hoping something happens.
+**result: passed. OLED retest worked and text was visible on the display.**
 
-**result: still to be tested.**
+the second ESP board is still a separate part of the project. it is physically part of the larger hardware idea, but the two boards are not communicating yet.
 
 ### all the test results
 
@@ -723,7 +724,7 @@ i want to figure that out properly rather than just connecting random wires and 
 | Phone web controller | Passed |
 | Buzzer controlled from phone | Passed |
 | LED with 220 ohm resistor | Final retest needed |
-| OLED displaying information | Not yet confirmed |
+| OLED displaying information | Passed during the updated retest |
 | ESP-to-ESP communication | Not implemented yet |
 
 honestly i think keeping these tests is just as important as keeping the pictures of the hardware.
@@ -904,15 +905,49 @@ i wanted to keep these because photos only show how everything looked at one spe
 
 ### original build recordings
 
+these earlier recordings show the first hardware setups, wiring experiments, and the beginning of the process of turning Marki from an idea into a real breadboard project.
+
 - [Marki build timelapse 1](https://lapse.hackclub.com/timelapse/WIssxWz5a36c)
 - [Marki build timelapse 2](https://lapse.hackclub.com/timelapse/qQNyRvMfsnoB)
 - [Marki build timelapse 3](https://lapse.hackclub.com/timelapse/rJlyFMNfZVh0)
 
 ### more coding and development sessions
 
+these sessions continue with the firmware, local controller, and hardware testing as the project moved toward the current ESP32 setup.
+
 - [Marki development session 4](https://lapse.hackclub.com/timelapse/hvsxg6gp-3WR)
 - [Marki development session 5](https://lapse.hackclub.com/timelapse/IgunjRW6FQJi)
 - [Marki development session 6](https://lapse.hackclub.com/timelapse/crfJcFE4N9NL)
+
+### latest Marki development sessions
+
+these are the newest sessions from the current stage of the project. they show the OLED being retested and the first version of Marki's startup animation taking shape.
+
+#### OLED retest
+
+- [OLED retest with the new code](https://lapse.hackclub.com/timelapse/opDws5MRcBYL)
+
+this was a quick retest after the earlier hardware issues. the updated code was uploaded, and the OLED was visibly powered on and displaying text on the breadboard. the title and footage center on the OLED, even though the written description mentions the LED.
+
+#### part 1 of the loading animation
+
+- [Part 1 of the loading animation](https://lapse.hackclub.com/timelapse/dYuxSDnQBMWR)
+
+this was the beginning of Marki's startup/loading animation. i used Canva to set up the canvas, add the main graphic and logo elements, and start building the first frames while figuring out how the sequence should look.
+
+#### part 2 of animating the start screen frame by frame
+
+- [Part 2 of animating the start screen frame by frame](https://lapse.hackclub.com/timelapse/LoA5DFUfHpHw)
+
+this continued the startup animation work. i adjusted the central Marki-style graphic, the surrounding line and burst elements, and the other visual pieces frame by frame using the frame strip at the bottom.
+
+the order of these latest sessions was:
+
+1. retest the OLED with the new code
+2. build the first part of the startup/loading animation
+3. continue refining the start screen frame by frame
+
+so the hardware side and the visual side of Marki are both moving forward now. the OLED has been validated again, while the startup animation is beginning to give Marki a more recognizable identity when it turns on.
 
 i think it'll be fun to look back at these once the project actually has a proper enclosure and everything is working together.
 
@@ -992,6 +1027,8 @@ the project is basically moving through a few layers:
 
 the local phone controller is already the start of that third part.
 
+the startup/loading animation is also becoming part of that experience. i want Marki to feel like it is actually starting up rather than just immediately showing a random page or line of text. the first two animation sessions are the beginning of that visual layer, and i am building it manually frame by frame so i can control how the graphics move and appear.
+
 eventually i want the setup to work something like this:
 
 \`\`\`text
@@ -1046,7 +1083,7 @@ there's still a decent amount left to do.
 
 - confirm the final LED test with the 220 ohm resistor
 - finish checking every connection on the breadboard
-- verify the OLED module and get it displaying information
+- expand the working OLED retest into the full Marki display interface
 - decide how the second ESP board should communicate with the main one
 - reduce the number of jumper wires
 - figure out a better power arrangement
@@ -1061,6 +1098,7 @@ there's still a decent amount left to do.
 - add active, away, and busy statuses
 - make an animated idle face
 - send custom messages from my phone
+- finish and connect the startup/loading animation to the Marki boot experience
 - start working on communication between the boards
 - make the local webpage nicer once the core functions work
 
@@ -1123,21 +1161,6 @@ the [parts and next steps](docs/parts-and-next-steps.md) page is for hardware id
 
 the uploaded ESP32 LED and buzzer test, plus safe upload notes, live in [firmware](firmware/README.md).
 
-### full project report
-
-i also put together a longer report documenting the build process.
-
-it covers the early ESP8266 setup, the wiring experiments, the Arduino IDE issues, the ESP32 switch, the working Wi-Fi and buzzer tests, and the LED troubleshooting.
-
-it's basically a much more detailed record of what happened while making this.
-
-- [read the complete Marki build report (PDF)](docs/build-report/MARKI_Complete_Build_Report.pdf)
-- [editable Word version](docs/build-report/MARKI_Complete_Build_Report.docx)
-
-the README is where i want to keep the main story.
-
-the report is there for all the smaller details, screenshots, and hardware notes that would make this page ridiculously long if i included every single one.
-
 ---
 
 ## project status
@@ -1159,4 +1182,3 @@ right now it's still a breadboard full of experiments.
 eventually i want it to be one little desktop companion.
 
 more updates coming as Marki gets less breadboard and more desktop.
-i 
